@@ -1,0 +1,84 @@
+<% layout('layouts/boilerplate') %>
+
+<%- include('../partials/navbar') %>    
+
+<style>
+    body {
+        background-image: url('https://img.lovepik.com/background/20211022/large/lovepik-film-background-board-film-background-image_500877889.jpg'); 
+        background-size: cover; 
+        background-repeat: no-repeat; 
+        background-position: center; 
+    }
+
+    .form-control {
+        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black for a shadowy effect */
+        color: white; /* White text for readability */
+        border: 1px solid #ccc; /* Light gray border */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="text-center text-light">Edit Movie</h2>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form action="/movies/<%= foundProduct._id %>?_method=PATCH" method="POST">
+
+                <!-- Title field -->
+                <div class="mb-4">
+                    <label for="title" class="form-label text-light">Title: </label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Title of the movie" value="<%= foundProduct.title %>" required>
+                </div>
+
+                <!-- Image URL field -->
+                <div class="mb-4">
+                    <label for="img" class="form-label text-light">Image URL: </label>
+                    <input type="text" class="form-control" name="img" id="img" placeholder="Image URL for the movie" value="<%= foundProduct.img %>" required>
+                </div>
+
+                <!-- Genre field -->
+                <div class="mb-4">
+                    <label for="genre" class="form-label text-light">Genre: </label>
+                    <input type="text" class="form-control" name="genre" id="genre" placeholder="Genre of the movie" value="<%= foundProduct.genre %>" required>
+                </div>
+
+                <!-- Release Year field -->
+                <div class="mb-4">
+                    <label for="releaseYear" class="form-label text-light">Release Year: </label>
+                    <input type="number" class="form-control" name="releaseYear" id="releaseYear" placeholder="Year of release" value="<%= foundProduct.releaseYear %>" required>
+                </div>
+
+                <!-- Description field -->
+                <div class="mb-4">
+                    <label for="description" class="form-label text-light">Description: </label>
+                    <textarea class="form-control" name="description" id="description" rows="3" placeholder="Short description of the movie"><%= foundProduct.description %></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="price" class="form-label text-light">Price: </label>
+                    <input type="text" class="form-control" name="price" id="director" placeholder="Price" value="<%= foundProduct.price %>" required>
+                </div>
+                <!-- Average Rating field -->
+                <div class="mb-4">
+                    <label for="avgRating" class="form-label text-light">Average Rating: </label>
+                    <input type="number" class="form-control" name="avgRating" id="avgRating" placeholder="Average rating (0-10)" step="0.1" min="0" max="10" value="<%= foundProduct.avgRating %>">
+                </div>
+
+                <!-- Director field -->
+                <div class="mb-4">
+                    <label for="director" class="form-label text-light">Director: </label>
+                    <input type="text" class="form-control" name="director" id="director" placeholder="Director's name" value="<%= foundProduct.director %>" required>
+                </div>
+
+                <button class="btn btn-primary btn-lg w-100" type="submit">Update Movie</button>
+            </form>
+        </div>
+    </div>
+</div>

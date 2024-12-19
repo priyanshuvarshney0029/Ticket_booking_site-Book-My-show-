@@ -1,0 +1,74 @@
+
+<% layout('layouts/boilerplate') %>
+<%- include('../partials/navbar') %>    
+<style>
+    body {
+        background-image: url('https://wallpapers.com/images/featured/movie-9pvmdtvz4cb0xl37.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        font-family: 'Arial', sans-serif;
+    }
+    .container {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .form-control {
+        background-color: rgba(255, 255, 255, 0.8);
+        color: black;
+    }
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+    .btn-success:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="row">
+    <div class="col-6 mx-auto container">
+        <form action="/movies" method="POST">
+            <div class="mb-3">
+                <label for="title">Title: </label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Title of the movie" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="img">Image URL: </label>
+                <input type="text" class="form-control" name="img" id="img" placeholder="Image URL for the movie" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="genre">Genre: </label>
+                <input type="text" class="form-control" name="genre" id="genre" placeholder="Genre of the movie" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="releaseYear">Release Year: </label>
+                <input type="number" class="form-control" name="releaseYear" id="releaseYear" placeholder="Year of release" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description">Description: </label>
+                <textarea name="description" class="form-control" id="description" rows="3" placeholder="Short description of the movie"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="avgRating">Average Rating: </label>
+                <input type="number" class="form-control" name="avgRating" id="avgRating" placeholder="Average rating (0-10)" step="0.1" min="0" max="10">
+            </div>
+
+            <div class="mb-3">
+                <label for="director">Director: </label>
+                <input type="text" class="form-control" name="director" id="director" placeholder="Director's name" required>
+            </div>
+
+            <button class="btn btn-sm btn-success" type="submit">Add Movie</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

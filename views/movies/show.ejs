@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie Details - <%= foundProduct.title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/path/to/your/css/starability.min.css"> <!-- Assuming you use starability for ratings -->
+    <style>
+        body {
+            background-color: #121212;
+            color: #FFFFFF;
+        }
+        .review-section {
+            padding: 2rem;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .review-section h1 {
+            color: #FF4C4C;
+            font-weight: bold;
+            text-align: center;
+        }
+        .rating-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            color: #FFD700;
+        }
+        .review-card {
+            background-color: #2a2a2a;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+        .review-card p {
+            margin: 0.5rem 0;
+            color: #FFD700;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .btn-submit {
+            width: 100%;
+            background-color: #FF4C4C;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+        .btn-submit:hover {
+            background-color: #e63946;
+        }
+        .btn-book-tickets {
+            background-color: #FF4C4C;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-book-tickets:hover {
+            background-color: #e63946;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .rating-box .starability-basic input[type="radio"] + label {
+            font-size: 1.25rem;
+            color: #FFD700;
+        }
+        .review-section form,
+        .review-section .review-card-container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        .movie-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Include -->
+    <%- include('../partials/navbar') %> 
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- // movie-image -->
+            <div class="col-lg-6 left-column">
+                <img src="<%= foundProduct.img %>" alt="<%= foundProduct.title %> Image" class="movie-image">
+            </div>
+            <!-- // movies detai -->
+            <div class="col-lg-6 movie-details">
+                <h2><%= foundProduct.title %></h2>
+                <h4>Directed by: <%= foundProduct.director %></h4>
+                
+                <div class="rating-box">
+                    <div class="rating"><%= foundProduct.avgRating %>/10</div>
+                    <div>(<%= foundProduct.reviews.length %> reviews)</div>
+                </div>
+                <div class="movie-info">
+                    <span>Genre: <%= foundProduct.genre %></span>
+                    <span>Release Year: <%= foundProduct.releaseYear %></span>
+                </div>
+                <p><strong>Description:</strong> <%= foundProduct.description %></p>
+                <p><strong>Price:</strong> Rs.<%= foundProduct.price %></p>
+                <div class="text-center mt-4">
+                    <a href="/book-ticket/<%= foundProduct._id %>" class="btn btn-book-tickets btn-lg">Book Tickets</a>
+                </div>
+            </div>
+        </div>
+        <!-- Review Section -->
+        <div class="review-section">
+            <h1>Leave Your Review</h1>
+            
+            <form action="/movies/<%=foundProduct._id %>/review" method="POST">
+                <div class="rating-box text-center">
+                    <fieldset class="starability-basic">
+                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                        <label for="no-rate" title="No rating">0</label>
+                        <input type="radio" id="rate1" name="rating" value="1" />
+                        <label for="rate1" title="Terrible">1</label>
+                        <input type="radio" id="rate2" name="rating" value="2" />
+                        <label for="rate2" title="Not good">2</label>
+                        <input type="radio" id="rate3" name="rating" value="3" />
+                        <label for="rate3" title="Average">3</label>
+                        <input type="radio" id="rate4" name="rating" value="4" />
+                        <label for="rate4" title="Very good">4</label>
+                        <input type="radio" id="rate5" name="rating" value="5" />
+                        <label for="rate5" title="Amazing">5</label>
+                        <input type="radio" id="rate6" name="rating" value="6" />
+                        <label for="rate6" title="Good">6</label>
+                        <input type="radio" id="rate7" name="rating" value="7" />
+                        <label for="rate7" title="Very good">7</label>
+                        <input type="radio" id="rate8" name="rating" value="8" />
+                        <label for="rate8" title="Great">8</label>
+                        <input type="radio" id="rate9" name="rating" value="9" />
+                        <label for="rate9" title="Excellent">9</label>
+                        <input type="radio" id="rate10" name="rating" value="10" />
+                        <label for="rate10" title="Perfect">10</label>
+                    </fieldset>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="desc">Description</label>
+                    <textarea class="form-control" name="comment" id="desc" rows="3"></textarea>
+                </div>
+                <button class="btn-submit">Submit</button>
+            </form>
+
+            <div class="review-card-container">
+                <% if (foundProduct.reviews.length > 0) { %>
+                    <% for (let review of foundProduct.reviews) { %>
+                        <div class="review-card">
+                            <p>Rated:<%= review.rating %> stars</p>
+                            <p>Comment:<%= review.comment %></p>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <p class="no-reviews text-center">No reviews available.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

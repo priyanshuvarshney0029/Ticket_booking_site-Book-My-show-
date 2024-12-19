@@ -1,0 +1,76 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    .login-box {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 10px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+        background-color: #218838;
+    }
+
+    .signup-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .signup-link:hover {
+        text-decoration: underline;
+    }
+
+    footer {
+        background-color: #343a40;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+    }
+</style>
+
+<div class="container login-container">
+    <div class="col-md-6 mx-auto login-box">
+        <%- include('../partials/flash') %>
+        <h1 class="display-6 text-center mb-4">Login</h1>
+        <form action="/login" method="POST">
+            <div class="mb-3">
+                <label class="form-label" for="username">Username:</label>
+                <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Password:</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-login">Login</button>
+            <p class="text-center fw-light mt-3">
+                Don't have an account? <a href="/register" class="signup-link">Sign up</a>
+            </p>
+        </form>
+    </div>
+</div>
+
