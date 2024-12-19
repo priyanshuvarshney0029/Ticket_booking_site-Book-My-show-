@@ -1,0 +1,1 @@
+Developed a movie ticket booking platform inspired by BookMyShow using Node.js, Express, MongoDB, and EJS, with Stripe integration for secure payments. Implemented responsive design with Bootstrap, real-time seat selection, and dynamic filters to fetch movies from the database for a seamless user experience.
